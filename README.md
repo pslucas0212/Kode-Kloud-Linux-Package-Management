@@ -3,15 +3,15 @@
 [KodeKloud Linux Basics Course Notes Table of Contents](https://github.com/pslucas0212/LinuxBasics)
 
 ## Linux Package Management
-Debian/Ubuntu  
-- DPKG/APT  
-Redhat/Fedora and RHEL derived Linux distos use RPM and are known as an RPM distribution     
-- RPM   
+- Debian including Debian, Ubuntu, Minut Linux, etc use DPKG and APT use DPKG for Package management are Debian distributions
+- Redhat/Fedora and RHEL derived Linux distos use RPM for package management and are known as an RPM distribution       
 
 .deb -> debian package manager
 .rpm -> Red Hat package manager
 
-Package - a compressed archive that is a set code packages (binaries, files and meta-data) to run software (or an application)
+Package - A package is a compressed archive that is a set of all code packages for a Linux distribution which includes the software binaries, configuration files and meta-data to run software (or an application.
+
+Each Linux distribution may run different tools, kernel and libraries and have different dependencies.  Each package includes a manifest.  And each package dependcy may package dependcies of its own.
 
 Manifest of a package describe the list of dependencies and minimal versions of supporting package/softare that is required to install softare
 
