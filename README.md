@@ -3,10 +3,10 @@
 [KodeKloud Linux Basics Course Notes Table of Contents](https://github.com/pslucas0212/LinuxBasics)
 
 ## Linux Package Management
-Debian/Ubuntu
-- DPKG/APT
-Redhat/Fedora
-- RPM
+Debian/Ubuntu  
+- DPKG/APT  
+Redhat/Fedora and RHEL derived Linux distos use RPM and are known as an RPM distribution     
+- RPM   
 
 .deb -> debian package manager
 .rpm -> Red Hat package manager
