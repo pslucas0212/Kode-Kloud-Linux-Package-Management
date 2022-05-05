@@ -15,52 +15,87 @@ Each Linux distribution may run different tools, kernel and libraries and have d
 
 Manifest of a package describe the list of dependencies and minimal versions of supporting package/softare that is required to install softare
 
-Package manage
-- insure integreity and authenticy of the padkage
-- Simplfy package management - installation, cofnfiguration
+Package manager is r
+- Software in a linux system that provides a consistent and automated process for installing, configuring, upgrading and removeing packages from the OS 
+- insure integreity and authenticy of the padkage by verifying digital certificates and checksums
+- Simplfy package management proces - Provide querying options for installation, cofnfiguration and update
 - Group packages
-- 
+- Manageing dependcies for all packages installed
 
 Types of package manageer
-- DPKG - debian
-- APT - new version that frontends DPAK
-- APT-GET
-- RPM - Red Hat
-- Yum - front end for RPM
-- DNF - new front end for RPM
+- DPKG - base package manager for debian
+- APT - new version that frontends DPKG
+- APT-GET - traditional frontend for DKPG systems
+- RPM - Base package manage for Red Hat Linux distros
+- Yum - front end for the RPM system found in RPM Systems
+- DNF - new more feature reich front end for RPM
 
-#### RPM and YUM
+#### Working withRPM and YUM
 
-RPM - Red Hat Package Manager
-- CentOS, Fedora, Redhat
-- .rpm 
+RPM - Stands for Red Hat Package Manager
+- Used with CentOS, Fedora, Redhat Enterprise Linux (Alma and Rocky)
+- most common extension - .rpm 
 
-RPM has five modes
-- installation - $ rpm -ivh telnet.rpm
-- uninstalling - $ rpm -e telnet.rpm
-- upgrade - $ rpm -Uvh telnet.rpm 
-- query - $ fpm -q telnet.rpm
-- verify - $ rpm -VF
+RPM has five modes: Installation, Uninstall, Upgrade, Quer, Verifying
+- installation: -i install, -v verbose pritnting details output of command
+```
+$ rpm -ivh telnet.rpm
+```
+- uninstalling -e uninstall
+```
+$ rpm -e telnet.rpm
+```
+- upgrade -U for Upgrade
+```
+$ rpm -Uvh telnet.rpm 
+```
+- query.  RPM database stores information about all RPM packages installed on the system.  Stored in the /var/lib/rpm directory and keeps track of installed packages and their history on your system
+```
+$ fpm -q telnet.rpm
+```
+- verify - verify compares installed packages with original packages
+```
+$ rpm -VF
+```
+- RPM does not resolve dependecies on its own.  
 
-YUM - YellowDog Update Manager
-- Works on RPM base distors
-- software repository
-- high level package manager - uses RPM under the covers
-- Automaticatlly resolves dependencies - which RPM does not
+YUM - YellowDog Update Modifier - free open source base package manager for RPM base linux systems
+- Works on RPM base distros
+- software repository - repository collection of packages and package dependcy manage /etc/yum.repos.d
+- high level package manager - Under the hood Yum uses RPM under the covers
+- Automaticatlly resolves dependencies and can install any RPM packages and dependecies which RPM does not
 
 Repoistory information is stored under /etc/yum.repos.d
 For Red Hat -> /etc/yum.repos.d/redhat.repo
 You may need to create your on repo file /etc/yum.repos.d/nginx.rpm
 
-YUM install example
+YUM depends on software repositories which act like a whares with hundres to thousands of packages.  These can be installed locally or accessed remotely.  Information about repository is stored in a files under /etc/yum.repos.d   
+For Redhat OS you would find a file /etc/yum.repos.d/redhat.repo this repository file points to the Red hat Repos.   
+You can add additional repos in the /etc/yum.repos.d if you need newer versions of the code.    
+
+Yum sequence of installation
+1. Yum first runs a transcation check.  If not installed in system checks for availabliity of installation package and it checks to see if any of the dependcies are already installed on the system.
+2. It displays a transcation summary and prompts the user to continuer or stop
+3. It then downloads packages to install on the system
+
+
+YUM install example. 
 ```
 $ yum install httpd
 $ yum -y install httpd
 ```
 After checking repository for all code and packages, Yum displays a transcation log.  
 
+Yum Commands
 ```
 $ yum repolist
+Not root, Subscription Management repositories not updated
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+repo id                          repo name
+rhel-8-for-x86_64-appstream-rpms Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
+rhel-8-for-x8
 ```
 To find where a particular app is located
 ```
@@ -70,7 +105,7 @@ To remove package run:
 ```
 $ yum remove httpd
 ```
-To update a package
+To update a single package, include the package name
 ```
 $ yum update telnet
 ```
