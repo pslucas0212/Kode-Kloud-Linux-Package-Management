@@ -116,31 +116,32 @@ $ yum update
 
 #### DPKG and APT
 
-Debian distros PureOS, Ubuntu
-Debian Package Manager - DPKG - low lever package manager like RPM
+Debian distros PureOS, Ubuntu, Linux mint, etc.
+Debian Package Manager - DPKG - low leve package manager like RPM.  It can be used to install, update, list, status and verify 
+
 
 - Installation/upgrade  - $ dpkg -i telnet.deb
 - uninstalling -  $ dpkg -r telnet.deb
 - List -  $ dpkg -l telnet
-- Status - $ dpkg -s telnet
+- Status - check for installation - $ dpkg -s telnet
 - Verifying -  $ dpkg -p <path to file>
   
- DPKG does not support depencies and we use APT and APT-GET
+ DPKG does not support package dependencies.  That's why we use higer level managers like APT and APT-GET.  APT and APT-GET do do not depend on each other
  
   APT - Advanced Pagkacge Manager
   
-  APT - acts as a front end manager depending on DPKG and software repositories.  Repos list are found in /etc/apt/sources.list
+  APT acts as a front end manager depends on the DKPG utility.  DPKG package Repos list are found in /etc/apt/sources.list. Repos can be on disk or remote
   
   APT commands
-  Refresh repo
+  Refresh the repositories and downloads a list of all packages
   ```
   $ apt update
   ```
   Upgrade
   ```
-  $ apt udpate
+  $ apt upgread
   ```
-  Add repos
+  Add repos opens /etc/apt/sources.list in vi for manual udpate.
   ```
   $ apt edit-sources
   ```
@@ -148,21 +149,26 @@ Debian Package Manager - DPKG - low lever package manager like RPM
   ```
   $ apt install telnet
   ```
-  Uninstall package
+  Remove package
   ```
   $ apt remove telnet
   ```
-  List 
+  Search 
   ```
   $ apt search telent
   ```
+  List all available packages
+  ```
+  $ apt list
+  ```
   
   #### APT vs APT-GET
-  APT is more user frienldy then apt-get
+  APT is more user frienldy then apt-get.  All the latest debian distros include APT
   
-  Installation output is easier to read
+  Installation output is easier to read with just enough information.  APT-GET does not provide as user friendly outptu
   
   Eassier to search
   ```
   $ apt search telnet
   ```
+ Cannot search for a package with atp-get.  You must use apt-cachce search and it the results are less useful. 
