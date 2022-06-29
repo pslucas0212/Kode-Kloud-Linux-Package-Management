@@ -2,41 +2,44 @@
 
 [KodeKloud Linux Basics Course Notes Table of Contents](https://github.com/pslucas0212/LinuxBasics)
 
+Hunders of Linux distributions available.  One way to categorize Linux OSes is by the package manager they use.  
+
 ## Linux Package Management
 - Debian including Debian, Ubuntu, Minut Linux, etc use DPKG and APT use DPKG for Package management are Debian distributions
-- Redhat/Fedora and RHEL derived Linux distos use RPM for package management and are known as an RPM distribution       
+- Redhat/Fedora/CentOS/AlmaLinux/Rocky/OEL and RHEL derived Linux distos use RPM and Yum for package management and are known as an RPM distribution       
 
 .deb -> debian package manager
 .rpm -> Red Hat package manager
 
-Package - A package is a compressed archive that is a set of all code packages for a Linux distribution which includes the software binaries, configuration files and meta-data to run software (or an application.
+Package - A package is a compressed archive that is a set of all code packages for a Linux distribution which includes the software binaries, configuration files and meta-data to run the Operating system and software (or an applications).
 
-Each Linux distribution may run different tools, kernel and libraries and have different dependencies.  Each package includes a manifest.  And each package dependcy may package dependcies of its own.
+Each Linux distribution may run different tools, kernel and libraries and have different dependencies.  Each Linux OS may run differently.  Each package includes a manifest which lists the correct pakage and those package dependencies to need to run that particular Linux OS.  And each package dependcy may package dependcies of its own.
 
 Manifest of a package describe the list of dependencies and minimal versions of supporting package/softare that is required to install softare
 
-Package manager is r
+Package manager is:
 - Software in a linux system that provides a consistent and automated process for installing, configuring, upgrading and removeing packages from the OS 
-- insure integreity and authenticy of the padkage by verifying digital certificates and checksums
-- Simplfy package management proces - Provide querying options for installation, cofnfiguration and update
-- Group packages
-- Manageing dependcies for all packages installed
+- insure integreity and authenticy of the padkage by verifying digital certificates and checksums.  To make sure the package is download from a trusted sourced and is safe to install
+- Simplfy package management proces - Provide querying options for installation, cofnfiguration and updates
+- Group packages by function
+- Manageing dependcies for all packages installed have all the packages needed to run a particular packages
 
-Types of package manageer
+Types of package manageer for Linux systems
 - DPKG - base package manager for debian
-- APT - new version that frontends DPKG
+- APT - new version that frontends DPKG for debian - Ubuntu, Mint, etc.
 - APT-GET - traditional frontend for DKPG systems
 - RPM - Base package manage for Red Hat Linux distros
-- Yum - front end for the RPM system found in RPM Systems
-- DNF - new more feature reich front end for RPM
+- Yum - front end for the RPM system found in Red Hat distor Systems
+- DNF - new more feature rich front end for RPM
 
-#### Working withRPM and YUM
+###  Working with RPM and YUM
 
 RPM - Stands for Red Hat Package Manager
-- Used with CentOS, Fedora, Redhat Enterprise Linux (Alma and Rocky)
+- Used with CentOS, Fedora, Red Hat Enterprise Linux (Alma and Rocky)
 - most common extension - .rpm 
 
-RPM has five modes: Installation, Uninstall, Upgrade, Quer, Verifying
+RPM has five basic modes of operation: Installation, Uninstall, Upgrade, Query, Verifying
+
 - installation: -i install, -v verbose pritnting details output of command
 ```
 $ rpm -ivh telnet.rpm
@@ -49,19 +52,20 @@ $ rpm -e telnet.rpm
 ```
 $ rpm -Uvh telnet.rpm 
 ```
-- query.  RPM database stores information about all RPM packages installed on the system.  Stored in the /var/lib/rpm directory and keeps track of installed packages and their history on your system
+- RPM database stores information about all RPM packages installed on the system.  Stored in the /var/lib/rpm directory and keeps track of installed packages and their history on your system
+- query database to get information about the installed package.  
 ```
 $ fpm -q telnet.rpm
 ```
-- verify - verify compares installed packages with original packages
+- verify - verify compares information from installed packages with the original packages.  Good to make sure the package is installed from a trusted source
 ```
 $ rpm -VF
 ```
-- RPM does not resolve dependecies on its own.  
+- RPM does not resolve dependecies on its own.  That's why we use YUM
 
 YUM - YellowDog Update Modifier - free open source base package manager for RPM base linux systems
 - Works on RPM base distros
-- software repository - repository collection of packages and package dependcy manage /etc/yum.repos.d
+- software repository - repository collection of packages and provides package dependcy management /etc/yum.repos.d. Repositories have a .repos extension
 - high level package manager - Under the hood Yum uses RPM under the covers
 - Automaticatlly resolves dependencies and can install any RPM packages and dependecies which RPM does not
 
@@ -69,14 +73,15 @@ Repoistory information is stored under /etc/yum.repos.d
 For Red Hat -> /etc/yum.repos.d/redhat.repo
 You may need to create your on repo file /etc/yum.repos.d/nginx.rpm
 
-YUM depends on software repositories which act like a whares with hundres to thousands of packages.  These can be installed locally or accessed remotely.  Information about repository is stored in a files under /etc/yum.repos.d   
-For Redhat OS you would find a file /etc/yum.repos.d/redhat.repo this repository file points to the Red hat Repos.   
-You can add additional repos in the /etc/yum.repos.d if you need newer versions of the code.    
+YUM depends on software repositories which act as a wharehouse with hundres to thousands of packages.  These can be installed locally or accessed remotely accessed via ftp, http or https.  Information about repository is stored in a files under /etc/yum.repos.d   
+Under the hood YUM uses RPM
+For Redhat OS you would find a file /etc/yum.repos.d/redhat.repo this repository file points to the orricial Red hat Repos.   
+You can add additional repos in the /etc/yum.repos.d if you need newer versions of the code.  In case you don't want to make use of the repo.  The official repo may not have the latest version of the repo you want to install or may not have the software that you would want to install.  
 
 Yum sequence of installation
-1. Yum first runs a transcation check.  If not installed in system checks for availabliity of installation package and it checks to see if any of the dependcies are already installed on the system.
-2. It displays a transcation summary and prompts the user to continuer or stop
-3. It then downloads packages to install on the system
+1. Yum first runs a transcation check.  If the package is not installed in the system, YUM checks for availabliity of installation package and it checks to see if any of the dependcies are already installed on the system or needs to be upgraded
+2. Next YUM displays a transcation summary and prompts the user to continuer or stop.  Type Y to continue or add -y to the command
+3. Next YUM downloads packages to install on the system
 
 
 YUM install example. 
@@ -89,6 +94,7 @@ After checking repository for all code and packages, Yum displays a transcation 
 Yum Commands
 ```
 $ yum repolist
+
 Not root, Subscription Management repositories not updated
 
 This system is not registered with an entitlement server. You can use subscription-manager to register.
@@ -97,7 +103,8 @@ repo id                          repo name
 rhel-8-for-x86_64-appstream-rpms Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
 rhel-8-for-x8
 ```
-To find where a particular app is located
+
+To find where a particular app is located and the package
 ```
 $ yum provides scp
 ```
@@ -113,8 +120,11 @@ Update all packages
 ```
 $ yum update
 ```
+See YUM man page for the complete list of YUM commands.   
 
-#### DPKG and APT
+
+
+### DPKG and APT
 
 Debian distros PureOS, Ubuntu, Linux mint, etc.
 Debian Package Manager - DPKG - low leve package manager like RPM.  It can be used to install, update, list, status and verify 
