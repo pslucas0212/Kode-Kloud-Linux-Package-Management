@@ -123,6 +123,90 @@ $ yum update
 See YUM man page for the complete list of YUM commands.   
 
 
+### YUM Lab
+- Use an rpm command and find out the exact package name for wget installed in this server
+```
+rpm -q wget
+wget-1.14-18.el7_6.1.x86_64
+```
+- The package for firefox browser has been downloaded under /home/bob
+```
+$ rpm -ivh firefox-68.6.0-1.el7.centos.x86_64.rpm 
+error: Failed dependencies:
+        liberation-fonts-common is needed by firefox-68.6.0-1.el7.centos.x86_64
+        liberation-sans-fonts is needed by firefox-68.6.0-1.el7.centos.x86_64
+...
+$ 
+```
+This installed failed due to missing dependencies.  
+- Install firefox with YUM
+```
+$ sudo yum install firefox-68.6.0-1.el7.centos.x86_64.rpm 
+[sudo] password for bob: 
+Loaded plugins: fastestmirror, ovl
+Examining firefox-68.6.0-1.el7.centos.x86_64.rpm: firefox-68.6.0-1.el7.centos.x86_64
+Marking firefox-68.6.0-1.el7.centos.x86_64.rpm to be installed
+Resolving Dependencies
+...
+Transaction Summary
+=======================================================================================================================================
+Install  1 Package  (+88 Dependent packages)
+Upgrade             (  7 Dependent packages)
+
+Total size: 268 M
+Total download size: 38 M
+Is this ok [y/d/N]: 
+...
+Dependency Updated:
+  nspr.x86_64 0:4.32.0-1.el7_9                     nss.x86_64 0:3.67.0-4.el7_9               nss-softokn.x86_64 0:3.67.0-3.el7_9      
+  nss-softokn-freebl.x86_64 0:3.67.0-3.el7_9       nss-sysinit.x86_64 0:3.67.0-4.el7_9       nss-tools.x86_64 0:3.67.0-4.el7_9        
+  nss-util.x86_64 0:3.67.0-1.el7_9                
+
+Complete!
+```
+- How may software repositories are configured for YUM in this system
+```
+$ sudo yum reploist
+Loaded plugins: fastestmirror, ovl
+No such command: reploist. Please use /bin/yum --help
+[bob@centos-lab ~]$ sudo yum repolist
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirror.pit.teraswitch.com
+ * extras: mirror.umd.edu
+ * updates: mirrors.lug.mtu.edu
+repo id                                                        repo name                                                         status
+base/7/x86_64                                                  CentOS-7 - Base                                                   10,072
+extras/7/x86_64                                                CentOS-7 - Extras                                                    512
+updates/7/x86_64                                               CentOS-7 - Updates                                                 3,891
+repolist: 14,475
+```
+- Which package provides tcpdump? 
+```
+$ sudo yum reploist
+Loaded plugins: fastestmirror, ovl
+No such command: reploist. Please use /bin/yum --help
+[bob@centos-lab ~]$ sudo yum repolist
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirror.pit.teraswitch.com
+ * extras: mirror.umd.edu
+ * updates: mirrors.lug.mtu.edu
+repo id                                                        repo name                                                         status
+base/7/x86_64                                                  CentOS-7 - Base                                                   10,072
+extras/7/x86_64                                                CentOS-7 - Extras                                                    512
+updates/7/x86_64                                               CentOS-7 - Updates                                                 3,891
+repolist: 14,475
+[bob@centos-lab ~]$ sudo yum provides tcpdump
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: mirror.pit.teraswitch.com
+ * extras: mirror.umd.edu
+ * updates: mirrors.lug.mtu.edu
+14:tcpdump-4.9.2-4.el7_7.1.x86_64 : A network traffic monitoring tool
+Repo        : base
+```
+
 
 ### DPKG and APT
 
