@@ -8,7 +8,7 @@ Hunders of Linux distributions available.  One way to categorize Linux OSes is b
 - Debian including Debian, Ubuntu, Minut Linux, etc use DPKG and APT use DPKG for Package management are Debian distributions
 - Redhat/Fedora/CentOS/AlmaLinux/Rocky/OEL and RHEL derived Linux distos use RPM and Yum for package management and are known as an RPM distribution       
 
-.deb -> debian package manager
+.deb -> debian package manager  
 .rpm -> Red Hat package manager
 
 Package - A package is a compressed archive that is a set of all code packages for a Linux distribution which includes the software binaries, configuration files and meta-data to run the Operating system and software (or an applications).
